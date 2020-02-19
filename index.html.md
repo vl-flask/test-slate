@@ -48,14 +48,13 @@ All API calls require an `API Key` in the request header. To generate a key, do 
 
 *Note that you may need to upgrade your [Subscription](https://megatron.com/portal/subscriptions) to get more API calls.*
 
-# Email check
+# Check an Email Address for Breaches
 
 **Request method:** `POST`
 
-**Request URL**: `https://megatron.com/api/v1/email/check`
+**Request URL**: `https://megatron.com/api/enterprise/v1/email/check`
 
-
-*To avoid passing plain email address over the network, we do recommend to use hashed email address search described [below](#hashed-email-check).*
+*If you consider that passing plaintext email addresses over the internet is risky, you may want to use the hashed email address values, as described [below](#hashed-email-check).*
 
 **Email check** returns:
 
@@ -72,7 +71,7 @@ The email check can be done in couple of steps:
 
 ```shell
 curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' \
---header 'api-key: 916f1847-6a59-4e1b-87fb-71c12231aacd' \
+--header 'api-key: 723f1847-6a59-4e1b-87fb-71c12231aacd' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --form 'email=test@test.com'
 ```
@@ -108,7 +107,7 @@ curl_easy_cleanup(curl);
 var client = new RestClient("https://megatron.com/portal/api/v1/email/check");
 client.Timeout = -1;
 var request = new RestRequest(Method.POST);
-request.AddHeader("api-key", "916f1847-6a59-4e1b-87fb-71c12231aacd");
+request.AddHeader("api-key", "345f1847-6a59-4e1b-87fb-71c12231aacd");
 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
 request.AlwaysMultipartFormData = true;
 request.AddParameter("email", "test@test.com");
@@ -150,7 +149,7 @@ func main() {
   if err != nil {
     fmt.Println(err)
   }
-  req.Header.Add("api-key", "916f1847-6a59-4e1b-87fb-71c12231aacd")
+  req.Header.Add("api-key", "916f2317-6a59-4e1b-87fb-71c12231aacd")
   req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
   req.Header.Set("Content-Type", writer.FormDataContentType())
