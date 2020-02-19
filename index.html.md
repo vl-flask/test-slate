@@ -40,11 +40,11 @@ For example, to check how many incidents we have for the email address test@test
 
 
 # API-Key
-All API calls require to add an `API Key` to the header of each request. Acquiring a key can be done in three easy steps:
-
+All API calls require an `API Key` in the request header. To generate a key, do the following:
 1. [Register](https://megatron.com/portal/signup) or [login](https://megatron.com/portal/login).
-2. Generate an API Key by clicking on `Create key` in [API section](https://megatron.com/portal/user-api).
-3. Include the `API-Key` in every API call as `Header`.
+2. Open the [API section](https://megatron.com/portal/user-api). 
+3. Click `Create key` to generate the key value. 
+4. Include the generated key in each API call header.
 
 *Note that you may need to upgrade your [Subscription](https://megatron.com/portal/subscriptions) to get more API calls.*
 
