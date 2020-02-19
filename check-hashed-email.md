@@ -1,20 +1,32 @@
-# Check an Email Address for Breaches
+# Check a Hashed Email Address for Breaches 
 
 **Request method:** `POST`
 
-**Request URL**: `https://megatron.com/api/enterprise/v1/email/check`
+**Request URL**: `https://megatron.com/api/enterprise/v1/email-hash/check`
 
-*You can avoid sending unencrypted email addresses by using the hashed email address values, as described [below](#hashed-email-check).*
+You can check an email address for data breaches using a hashed value so you don't send an unencrypted value over the internet. 
 
-
-**Email check** returns:
-
+**Hashed email check** returns:
 * Incidents count for **unverified** emails.
 * Incidents count and details for **verified** emails.
 
 How to construct the request:
-1. Include the API key in the request header.
-2. Specify your hashed email in the request body.
+1. Hash your email address value using **SHA256**.
+2. Include the API key in the request header.
+3. Specify your hashed email address value in the request body.
+
+### Hashing instruction
+The Breach Report API only has access to encrypted email address values. The used encryption method is **Argond2d(SHA256(<email>))**.
+Before sending a query, generate the email address hash.
+
+How to produce an email address hash on Linux or Mac OS:
+
+1. Convert your email to lowercase letters.
+2. In the terminal, run the following command: `echo -n {email} | sha256sum`
+Here, `{email}` is an email that you want to check. Don't use the brackets!
+3. The command will produce a unique 64-character value that will look like: `8b063d4d3f323127ad8c13d42207269a747da2421db686144c5c982cc491e1ad`.
+
+Alternatively, you may use an online hashing tool. For example, the [SHA256 tool on github.io](https://emn178.github.io/online-tools/sha256.html).
 
 ## Request and response examples
 
@@ -78,14 +90,14 @@ curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' 
 | Name | Type | Description |
 | ------ | ------ | ------ |
 | api-key | string | An API Key retrieved from [Portal](https://megatron.com/portal/user-api). Should be included as `Header`. |
-| email | string | Email you want to check. |
+| hash | string | Hashed email address you want to check. |
 
 
 
 > Response example: Verified email
 
 ### Verified email response:
-
+The output is the same as with checks by plaintext emails. 
 ```
 {
     "email": "test@test.com",
@@ -128,7 +140,7 @@ curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' 
 | description | string | Text description of the incident. |
 | incidentDataTypes| [string] | The list of leaked data types within the incident. |
 
-> Reponse example: Unverified email
+> Response example: Unverified email
 
 ### Unverified email response:
 

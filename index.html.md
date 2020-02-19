@@ -54,336 +54,72 @@ All API calls require an `API Key` in the request header. To generate a key, do 
 
 **Request URL**: `https://megatron.com/api/enterprise/v1/email/check`
 
-*If you consider that passing plaintext email addresses over the internet is risky, you may want to use the hashed email address values, as described [below](#hashed-email-check).*
+*You can avoid sending unencrypted email addresses by using the hashed email address values, as described [below](#hashed-email-check).*
+
 
 **Email check** returns:
 
 * Incidents count for **unverified** emails.
 * Incidents count and details for **verified** emails.
 
-The email check can be done in couple of steps:
-
-1. Include API Key as an `API-Key` header.
-2. Include your hashed email in body request.
+To check a plaintext email address for breaches:
+1. Include the API key in the request header.
+2. Specify your hashed email in the request body.
 
 ## Request and response examples
 
-
 ```shell
 curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' \
---header 'api-key: 723f1847-6a59-4e1b-87fb-71c12231aacd' \
+--header 'api-key: 72427357-6a59-4e1b-87fb-71c12231aacd' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --form 'email=test@test.com'
 ```
 
 ```c
-CURL *curl;
-CURLcode res;
-curl = curl_easy_init();
-if(curl) {
-  curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
-  curl_easy_setopt(curl, CURLOPT_URL, "https://megatron.com/portal/api/v1/email/check");
-  curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-  curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
-  struct curl_slist *headers = NULL;
-  headers = curl_slist_append(headers, "api-key: 916f1847-6a59-4e1b-87fb-71c12231aacd");
-  headers = curl_slist_append(headers, "Content-Type: application/x-www-form-urlencoded");
-  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-  curl_mime *mime;
-  curl_mimepart *part;
-  mime = curl_mime_init(curl);
-  part = curl_mime_addpart(mime);
-  curl_mime_name(part, "email");
-  curl_mime_data(part, "test@test.com", CURL_ZERO_TERMINATED);
-  curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
-  res = curl_easy_perform(curl);
-  curl_mime_free(mime);
-}
-curl_easy_cleanup(curl);
+// Sample C code
 ```
 
 ```csharp
-
-var client = new RestClient("https://megatron.com/portal/api/v1/email/check");
-client.Timeout = -1;
-var request = new RestRequest(Method.POST);
-request.AddHeader("api-key", "345f1847-6a59-4e1b-87fb-71c12231aacd");
-request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-request.AlwaysMultipartFormData = true;
-request.AddParameter("email", "test@test.com");
-IRestResponse response = client.Execute(request);
-Console.WriteLine(response.Content);
+// Sample C# code
 ```
 
 
 ```go
-
-package main
-
-import (
-  "fmt"
-  "bytes"
-  "mime/multipart"
-  "net/http"
-  "io/ioutil"
-)
-
-func main() {
-
-  url := "https://megatron.com/portal/api/v1/email/check"
-  method := "POST"
-
-  payload := &bytes.Buffer{}
-  writer := multipart.NewWriter(payload)
-  _ = writer.WriteField("email", "test@test.com")
-  err := writer.Close()
-  if err != nil {
-    fmt.Println(err)
-  }
-
-
-  client := &http.Client {
-  }
-  req, err := http.NewRequest(method, url, payload)
-
-  if err != nil {
-    fmt.Println(err)
-  }
-  req.Header.Add("api-key", "916f2317-6a59-4e1b-87fb-71c12231aacd")
-  req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-
-  req.Header.Set("Content-Type", writer.FormDataContentType())
-  res, err := client.Do(req)
-  defer res.Body.Close()
-  body, err := ioutil.ReadAll(res.Body)
-
-  fmt.Println(string(body))
-}
+// Sample Golang comments
 ```
 
 ```http
-
-POST /portal/api/v1/email/check HTTP/1.1
-Host: megatron.com
-api-key: 916f1847-6a59-4e1b-87fb-71c12231aacd
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-
-----WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="email"
-
-test@test.com
-----WebKitFormBoundary7MA4YWxkTrZu0gW
+<!-- Sample HTTP code --> 
 ```
 
 
 ```java
-
-POST /portal/api/v1/email/check HTTP/1.1
-Host: megatron.com
-api-key: 916f1847-6a59-4e1b-87fb-71c12231aacd
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-
-----WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="email"
-
-test@test.com
-----WebKitFormBoundary7MA4YWxkTrZu0gW
+// Sample Java code
 ```
-
 
 ```javascript
-
----------
-Fetch
----------
-
-POST /portal/api/v1/email/check HTTP/1.1
-Host: megatron.com
-api-key: 916f1847-6a59-4e1b-87fb-71c12231aacd
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-
-----WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="email"
-
-test@test.com
-----WebKitFormBoundary7MA4YWxkTrZu0gW
+// Fetch
 ```
-
 
 ```javascript
-
-============
-NodeJS
-============
-POST /portal/api/v1/email/check HTTP/1.1
-Host: megatron.com
-api-key: 916f1847-6a59-4e1b-87fb-71c12231aacd
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-
-----WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="email"
-
-test@test.com
-----WebKitFormBoundary7MA4YWxkTrZu0gW
+// NodeJS
 ```
-
 
 ```php
-<?php
-
-$curl = curl_init();
-
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://megatron.com/portal/api/v1/email/check",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => array('email' => 'test@test.com'),
-  CURLOPT_HTTPHEADER => array(
-    "api-key: 916f1847-6a59-4e1b-87fb-71c12231aacd",
-    "Content-Type: application/x-www-form-urlencoded"
-  ),
-));
-
-$response = curl_exec($curl);
-
-curl_close($curl);
-echo $response;
+// Sample PHP code
 ```
-
 
 ```python
-
-=======
-http.client
-=======
-
-import http.client
-import mimetypes
-conn = http.client.HTTPSConnection("megatron.com")
-dataList = []
-boundary = 'wL36Yn8afVp8Ag7AmP8qZ0SA4n1v9T'
-dataList.append('--' + boundary)
-dataList.append('Content-Disposition: form-data; name=email;')
-
-dataList.append('Content-Type: {}'.format('multipart/form-data'))
-dataList.append('')
-
-dataList.append("test@test.com")
-dataList.append('--'+boundary+'--')
-dataList.append('')
-body = '\r\n'.join(dataList)
-payload = body
-headers = {
-  'api-key': '916f1847-6a59-4e1b-87fb-71c12231aacd',
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Content-type': 'multipart/form-data; boundary={}'.format(boundary)
-}
-conn.request("POST", "/portal/api/v1/email/check", payload, headers)
-res = conn.getresponse()
-data = res.read()
-print(data.decode("utf-8"))
-
-=======
-Requests
-=======
-
-import requests
-
-url = "https://megatron.com/portal/api/v1/email/check"
-
-payload = {'email': 'test@test.com'}
-files = [
-
-]
-headers = {
-  'api-key': '916f1847-6a59-4e1b-87fb-71c12231aacd',
-  'Content-Type': 'application/x-www-form-urlencoded'
-}
-
-response = requests.request("POST", url, headers=headers, data = payload, files = files)
-
-print(response.text.encode('utf8'))
+# Sample Python code - http.client
+# Sample Python code - requests
 ```
 
-
 ```ruby
-require "uri"
-require "net/http"
-
-url = URI("https://megatron.com/portal/api/v1/email/check")
-
-https = Net::HTTP.new(url.host, url.port);
-https.use_ssl = true
-
-request = Net::HTTP::Post.new(url)
-request["api-key"] = "916f1847-6a59-4e1b-87fb-71c12231aacd"
-request["Content-Type"] = "application/x-www-form-urlencoded"
-form_data = [['email', 'test@test.com']]
-request.set_form form_data, 'multipart/form-data'
-response = https.request(request)
-puts response.read_body
+# Sample Ruby code 
 ```
 
 ```swift
-import Foundation
-
-var semaphore = DispatchSemaphore (value: 0)
-
-let parameters = [
-  [
-    "key": "email",
-    "value": "test@test.com",
-    "type": "text"
-  ]] as [[String : Any]]
-
-let boundary = "Boundary-\(UUID().uuidString)"
-var body = ""
-var error: Error? = nil
-for param in parameters {
-  if param["disabled"] == nil {
-    let paramName = param["key"]!
-    body += "--\(boundary)\r\n"
-    body += "Content-Disposition:form-data; name=\"\(paramName)\""
-    let paramType = param["type"] as! String
-    if paramType == "text" {
-      let paramValue = param["value"] as! String
-      body += "\r\n\r\n\(paramValue)\r\n"
-    } else {
-      let paramSrc = param["src"] as! String
-      let fileData = try NSData(contentsOfFile:paramSrc, options:[]) as Data
-      let fileContent = String(data: fileData, encoding: .utf8)!
-      body += "; filename=\"\(paramSrc)\"\r\n"
-        + "Content-Type: \"content-type header\"\r\n\r\n\(fileContent)\r\n"
-    }
-  }
-}
-body += "--\(boundary)--\r\n";
-let postData = body.data(using: .utf8)
-
-var request = URLRequest(url: URL(string: "https://megatron.com/portal/api/v1/email/check")!,timeoutInterval: Double.infinity)
-request.addValue("916f1847-6a59-4e1b-87fb-71c12231aacd", forHTTPHeaderField: "api-key")
-request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-
-request.httpMethod = "POST"
-request.httpBody = postData
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in 
-  guard let data = data else {
-    print(String(describing: error))
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-  semaphore.signal()
-}
-
-task.resume()
-semaphore.wait()
+// Sample Swift Code
 ```
 
 

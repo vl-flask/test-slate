@@ -8,13 +8,12 @@
 
 
 **Email check** returns:
-
 * Incidents count for **unverified** emails.
 * Incidents count and details for **verified** emails.
 
 How to construct the request:
 1. Include the API key in the request header.
-2. Specify your hashed email in the request body.
+2. Specify the email in the request body.
 
 ## Request and response examples
 
