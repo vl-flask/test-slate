@@ -1,20 +1,21 @@
-# Check an Email Address for Breaches By ID
+# Check an Email Address for Breaches By Email ID
 
 **Request method:** `GET`
 
-**Request URL**: `https://megatron.com/api/enterprise/v1/{EMAIL_ID}/<>/check`
+**Request URL**: `https://megatron.com/api/enterprise/v1/email/{EMAIL_ID}/check`
 
-*You can avoid sending unencrypted email addresses by using the hashed email address values, as described [below](#hashed-email-check).*
-
+You can check an email address for data breaches using the email address's ID in the Breach Report database.
+Alternatively, you can check email addresses by:
+* [Hashed email addresses](#hashed-email-check) (recommended)
+* [Plaintext email addresses](#plaintext-email-check)
 
 **Email check** returns:
-
 * Incidents count for **unverified** emails.
 * Incidents count and details for **verified** emails.
 
 How to construct the request:
 1. Include the API key in the request header.
-2. Specify your hashed email in the request body.
+2. Specify the Email ID in the requested URL.
 
 ## Request and response examples
 
@@ -23,8 +24,7 @@ curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' 
 --header 'api-key: 72427357-6a59-4e1b-87fb-71c12231aacd' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --form 'email=test@test.com'
-```
-
+```Ad
 ```c
 // Sample C code
 ```
