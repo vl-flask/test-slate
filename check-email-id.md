@@ -1,8 +1,8 @@
-# Check an Email Address for Breaches
+# Check an Email Address for Breaches By ID
 
-**Request method:** `POST`
+**Request method:** `GET`
 
-**Request URL**: `https://megatron.com/api/enterprise/v1/email/check`
+**Request URL**: `https://megatron.com/api/enterprise/v1/{EMAIL_ID}/<>/check`
 
 *You can avoid sending unencrypted email addresses by using the hashed email address values, as described [below](#hashed-email-check).*
 
@@ -82,7 +82,7 @@ curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' 
 
 
 
-> Response for verified email
+> Response for verified email address
 
 ### Verified email response:
 
@@ -128,7 +128,7 @@ curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' 
 | description | string | Text description of the incident. |
 | incidentDataTypes| [string] | The list of leaked data types within the incident. |
 
-> Response for unverified email
+> Response for an unverified email address
 
 ### Unverified email response:
 
