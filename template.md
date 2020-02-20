@@ -77,7 +77,7 @@ curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' 
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| api-key | string | An API Key retrieved from [Portal](https://megatron.com/portal/user-api). Should be included as `Header`. |
+| api-key | string | An API key you can generate on the [Portal](https://megatron.com/portal/user-api). Include this key in the request header. |
 | email | string | Email you want to check. |
 
 

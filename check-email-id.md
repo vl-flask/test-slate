@@ -5,6 +5,7 @@
 **Request URL**: `https://megatron.com/api/enterprise/v1/email/{EMAIL_ID}/check`
 
 You can check an email address for data breaches using the email address's ID in the Breach Report database.
+
 Alternatively, you can check email addresses by:
 * [Hashed email addresses](#hashed-email-check) (recommended)
 * [Plaintext email addresses](#plaintext-email-check)
@@ -77,7 +78,7 @@ curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' 
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| api-key | string | An API Key retrieved from [Portal](https://megatron.com/portal/user-api). Should be included as `Header`. |
+| api-key | string | An API key you can generate on the [Portal](https://megatron.com/portal/user-api). Include this key in the request header. |
 | email | string | Email you want to check. |
 
 
