@@ -4,7 +4,8 @@
 
 **Request URL**: `https://megatron.com/api/enterprise/v1/email/`
 
-This API call adds an email address to a Breach Report account associated with the secret API key that needs to be included in the request header. 
+This API call assigns an email address to a domain. Both the email address and the domain must already exist in the Breach Report data for the operation to be successful. 
+Email address assigning enables the data to be aggregated across the registered domains. 
 
 
 **Email check** returns:
@@ -14,7 +15,10 @@ This API call adds an email address to a Breach Report account associated with t
 
 How to construct the request:
 1. Include the API key in the request header.
-2. Specify the email address in the request body.
+2. In the request body, specify:
+2.1. Email address
+2.2. Domain identifier in the Breach Report database
+
 
 ## Request and response examples
 
@@ -29,7 +33,6 @@ How to construct the request:
 ```csharp
 // Sample C# code
 ```
-
 
 ```go
 // Sample Golang comments
@@ -75,20 +78,21 @@ How to construct the request:
 | Name | Type | Description |
 | ------ | ------ | ------ |
 | api-key | string | An API key you can generate on the [Portal](https://megatron.com/portal/user-api). Include this key in the request header. |
-| email | string | Email you want to add to the account for monitoring. |
+| email | string | Email address in the Breach Report database. |
+| domainId | string | Identifier of the domain in the Breach Report database. |
 
 
 
-> Response example: Email address has been added.
+> Response: Email Successfully Assigned
 
-### Email address has been added:
+### Verified email response:
 
 ```
 {
   "status": "success",
   "email": {
-    "id": "5e4e968511944f4cf3184eb3",
-    "emailAddress": "test@test.com"
+    "id": "5e4e9b0d11944f4cf3184eb7",
+    "emailAddress": "me@vassily.pro"
   }
 }
  
@@ -99,9 +103,9 @@ How to construct the request:
 | emailAddress | string | The requested email address. |
 
 
-> Response example: Email address has not been added.
+> Response: Email address can't be assigned
 
-### Email address was added before:
+### Unverified email response:
 
 ```
 {

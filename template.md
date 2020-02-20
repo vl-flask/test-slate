@@ -19,10 +19,7 @@ How to construct the request:
 ## Request and response examples
 
 ```shell
-curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' \
---header 'api-key: 72427357-6a59-4e1b-87fb-71c12231aacd' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---form 'email=test@test.com'
+# sample terminal command
 ```
 
 ```c

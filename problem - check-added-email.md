@@ -1,14 +1,13 @@
-# Check an Email Address for Breaches By Email ID
+# Check an Email Address for Breaches
 
 **Request method:** `GET`
 
-**Request URL**: `https://megatron.com/api/enterprise/v1/email/{EMAIL_ID}/check`
+**Request URL**: `{BASE_URL}/api/enterprise/v1/email/check`
 
-You can check an email address for data breaches using the email address's ID in the Breach Report database.
+You can check an email address for data breaches. This method uses the plaintext email address value.
 
-Alternatively, you can check email addresses by:
-* [Hashed email addresses](#hashed-email-check) (recommended)
-* [Plaintext email addresses](#plaintext-email-check)
+Alternatively, you may check an email address byu using a [hashed email address](#hashed-email-check) (recommended method).
+
 
 **Email check** returns:
 * Incidents count for **unverified** emails.
@@ -16,16 +15,14 @@ Alternatively, you can check email addresses by:
 
 How to construct the request:
 1. Include the API key in the request header.
-2. Specify the Email ID in the requested URL.
+2. Specify the email in the request body.
 
 ## Request and response examples
 
 ```shell
-curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' \
---header 'api-key: 72427357-6a59-4e1b-87fb-71c12231aacd' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---form 'email=test@test.com'
-```Ad
+# sample terminal command
+```
+
 ```c
 // Sample C code
 ```
@@ -78,12 +75,12 @@ curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' 
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| api-key | string | An API key you can generate on the [Portal](https://megatron.com/portal/user-api). Include this key in the request header. |
+| api-key | string | An API key you can generate on the [Portal](https://megatron.com/portal/user-api). Should be included in the request header. |
 | email | string | Email you want to check. |
 
 
 
-> Response for verified email address
+> Response example: Verified email
 
 ### Verified email response:
 
@@ -129,7 +126,7 @@ curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' 
 | description | string | Text description of the incident. |
 | incidentDataTypes| [string] | The list of leaked data types within the incident. |
 
-> Response for an unverified email address
+> Reponse example: Unverified email
 
 ### Unverified email response:
 

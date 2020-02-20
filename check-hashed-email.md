@@ -1,17 +1,19 @@
-# Check a Hashed Email Address for Breaches 
+# Check an Email Address for Breaches by SHA256 hash 
 
 **Request method:** `POST`
 
-**Request URL**: `https://megatron.com/api/enterprise/v1/email-hash/check`
+**Request URL**: `{BASE_URL}/api/enterprise/v1/email-hash/check`
 
-You can check an email address for data breaches using a hashed value so you don't send an unencrypted value over the internet. 
+You can check an email address for breaches using a SHA256-encrypted email address value. This is  the recommended way to check email addresses for breaches using the Breach Report API.
+
+Alternatively, you may check an email by using the [plaintext email address value](#plaintext-email-check). 
 
 **Hashed email check** returns:
 * Incidents count for **unverified** emails.
-* Incidents count and details for **verified** emails.
+* Incidents count and further details for **verified** emails.
 
 How to construct the request:
-1. Hash your email address value using **SHA256**.
+1. Calculate your email address hash using **SHA256**.
 2. Include the API key in the request header.
 3. Specify your hashed email address value in the request body.
 
@@ -20,7 +22,6 @@ The Breach Report API only has access to encrypted email address values. The use
 Before sending a query, generate the email address hash.
 
 How to produce an email address hash on Linux or Mac OS:
-
 1. Convert your email to lowercase letters.
 2. In the terminal, run the following command: `echo -n {email} | sha256sum`
 Here, `{email}` is an email that you want to check. Don't use the brackets!
@@ -31,10 +32,8 @@ Alternatively, you may use an online hashing tool. For example, the [SHA256 tool
 ## Request and response examples
 
 ```shell
-curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' \
---header 'api-key: 72427357-6a59-4e1b-87fb-71c12231aacd' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---form 'email=test@test.com'
+// Sample curl command
+
 ```
 
 ```c
@@ -94,7 +93,7 @@ curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' 
 
 
 
-> Response example: Verified email
+> Verified email response
 
 ### Verified email response:
 The output is the same as with checks by plaintext emails. 

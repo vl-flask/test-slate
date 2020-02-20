@@ -2,9 +2,11 @@
 
 **Request method:** `POST`
 
-**Request URL**: `https://megatron.com/api/enterprise/v1/email/check`
+**Request URL**: `{BASE_URL}/api/enterprise/v1/email/check`
 
-*You can avoid sending unencrypted email addresses by using the hashed email address values, as described [below](#hashed-email-check).*
+You can check an email address for data breaches. This method uses the plaintext email address value.
+
+Alternatively, you may check an email address byu using a [hashed email address](#hashed-email-check) (recommended method).
 
 
 **Email check** returns:
@@ -18,10 +20,7 @@ How to construct the request:
 ## Request and response examples
 
 ```shell
-curl --location --request POST 'https://megatron.com/portal/api/v1/email/check' \
---header 'api-key: 72427357-6a59-4e1b-87fb-71c12231aacd' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---form 'email=test@test.com'
+# sample terminal command
 ```
 
 ```c

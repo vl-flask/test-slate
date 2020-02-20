@@ -1,10 +1,10 @@
-# Add an Email Address to the Account
+# Add an Internet Domain to the Account
 
 **Request method:** `POST`
 
-**Request URL**: `https://megatron.com/api/enterprise/v1/domain/`
+**Request URL**: `{BASE_URL}/api/enterprise/v1/domain/`
 
-This API call adds an internet domain to the Breach Report account associated with the secret API key that needs to be included in the request header. 
+This API request adds an internet domain to the Breach Report account associated with the secret API key from the request header. 
 
 **Domain check** returns a response code and a status message. 
 
@@ -15,10 +15,7 @@ How to construct the request:
 ## Request and response examples
 
 ```shell
-curl --location --request POST 'https://megatron.com/api/enterprise/v1/email/' \
---header 'api-key: 72427357-6a59-4e1b-87fb-71c12231aacd' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---form 'domain=example.com'
+# Sample terminal command
 ```
 
 ```c
@@ -77,7 +74,32 @@ curl --location --request POST 'https://megatron.com/api/enterprise/v1/email/' \
 | domain | string | Domain you want to add to the account for monitoring. |
 
 
+> Response example: Email address has been added.
+### Email address has been added:
 
-<aside class="success">
-If the email address has been successfully added to the account, the response will be `200 OK`. 
-</aside>
+```
+{
+  "status": "success",
+  "domain": {
+    "id": "5e4e978211944f4cf3184eb4",
+    "domainName": "vassily.pro"
+  }
+}
+ 
+```
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| id | string | ID of the requested email address in the Breach Report database. |
+| emailAddress | string | The requested email address. |
+
+
+> Response example: Email address has not been added.
+
+### Email address was added before:
+
+```
+{
+  "status": "error",
+  "message": "Email address already exists"
+}
+```
