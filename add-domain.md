@@ -4,9 +4,9 @@
 
 **Request URL**: `{BASE_URL}/api/enterprise/v1/domain/`
 
-This API request adds an internet domain to the Breach Report account associated with the secret API key from the request header. 
+This API request adds an internet domain to the Breach Report account associated with the API key from the request header. 
 
-**Domain check** returns a response code and a status message. 
+The request returns a response code and a status message. 
 
 How to construct the request:
 1. Include the API key in the request header.
@@ -89,8 +89,8 @@ How to construct the request:
 ```
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| id | string | ID of the requested email address in the Breach Report database. |
-| emailAddress | string | The requested email address. |
+| id | string | Identifier of the domain . |
+| domain | string | The requested email address. |
 
 
 > Response example: Email address has not been added.
